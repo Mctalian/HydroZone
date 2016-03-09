@@ -3,7 +3,11 @@
     "version": "0.0.2",
     "description": "An application that uses the Rachio public API to water zones.",
     "author": "Robert Anderson <r-anderson.9@onu.edu>",
-
+    "scripts": {
+        "postinstall": "bower install",
+        "start": "node server.js",
+        "test": "echo 'No Tests Yet' && exit 1"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/McTalian/HydroZone"
