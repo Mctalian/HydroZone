@@ -6,3 +6,4 @@ Feature: Home page
     Scenario: Visiting the home page
         Given I am on the home page
         Then I should see "HydroZone"
+        And I should see "API Token"
