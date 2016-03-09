@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <meta charset="UTF-8">
     <title>HydroZone</title>
 </head>
 
 <body>
-    <h1>Welcome to the HydroZone! Two Zones Enter, One Zone Leaves (well-hydrated)!</h1>
+    <header>
+        <h1>Welcome to the HydroZone!</h1>
+        <h4>Two Zones Enter, One Zone Leaves (well-hydrated)!</h4>
+    </header>
+
+    <section>
+        <label>API Token:</label>
+        <input type="text" ng-model="apiToken" placeholder="Please provide your Rachio API Token">
+        <hr>
+        <p ng-if="apiToken">It looks like your API Token is {{apiToken}}, very interesting...</p>
+    </section>
+
+    <!-- DEPENDENCIES -->
+    <script src="/lib/angular/angular.js"></script>
 </body>
 </html>
