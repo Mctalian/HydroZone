@@ -18,4 +18,4 @@ angular.module('HydroZone')
             $locationProvider.html5Mode(true);
         }
     ]
-)
+);
