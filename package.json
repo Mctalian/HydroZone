@@ -1,0 +1,32 @@
+{
+    "name": "HydroZone",
+    "version": "0.0.1",
+    "description": "An application that uses the Rachio public API to water zones.",
+    "author": "Robert Anderson <r-anderson.9@onu.edu",
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/McTalian/HydroZone"
+    },
+    "bugs": {
+        "url": "https://github.com/McTalian/HydroZone/issues"
+    },
+    "keywords": [
+        "rachio",
+        "iro",
+        "zone",
+        "water",
+        "hydrate",
+        "hydro"
+    ],
+    "dependencies": {
+
+    },
+    "devDependencies": {
+
+    },
+    "preferGlobal": false,
+    "private": true,
+
+    "license": "MIT"
+}
