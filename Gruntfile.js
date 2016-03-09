@@ -24,10 +24,20 @@ module.exports = function(grunt) {
             },
 
             build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js']
+        },
+
+        cucumberjs: {
+            options: {
+                format: 'html',
+                output: 'reports/my_report.html',
+                theme: 'bootstrap'
+            },
+            features: ['features/**/*.feature']
         }
     });
 
     // LOAD GRUNT PACKAGES
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-cucumberjs');
 };
