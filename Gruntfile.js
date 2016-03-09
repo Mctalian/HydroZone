@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 reporter: require('jshint-stylish')
             },
 
-            build: ['*.js', 'public/**/*.js', '!public/lib/**/*.js']
+            build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js']
         }
     });
 
