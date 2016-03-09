@@ -19,10 +19,11 @@ module.exports = function(grunt) {
 
         jshint: {
             options: {
+                esversion: 6,
                 reporter: require('jshint-stylish')
             },
 
-            build: ['Gruntfile.js']
+            build: ['*.js', 'public/**/*.js', '!public/lib/**/*.js']
         }
     });
 
