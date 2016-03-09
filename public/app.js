@@ -1,1 +1,3 @@
-angular.module("HydroZone", []);
+angular.module("HydroZone", [
+    'ngMaterial'
+]);
