@@ -6,7 +6,7 @@
     "scripts": {
         "postinstall": "bower install",
         "start": "node server.js",
-        "test": "echo 'No Tests Yet' && exit 1"
+        "test": "./node_modules/.bin/cucumber-js features -r features/step_definitions"
     },
     "repository": {
         "type": "git",
