@@ -1,6 +1,6 @@
 {
     "name": "HydroZone",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "An application that uses the Rachio public API to water zones.",
     "author": "Robert Anderson <r-anderson.9@onu.edu>",
     "scripts": {
