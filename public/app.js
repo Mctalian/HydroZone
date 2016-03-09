@@ -1,5 +1,6 @@
 angular.module("HydroZone", [
-    'ngMaterial'
+    'ngMaterial',
+    'ui.router'
 ])
 .config(
     [
