@@ -20,7 +20,7 @@
         "hydro"
     ],
     "dependencies": {
-
+        "express": "4.13.4"
     },
     "devDependencies": {
         "grunt": "0.4.5",
