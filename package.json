@@ -6,7 +6,7 @@
     "scripts": {
         "postinstall": "bower install",
         "start": "node server.js",
-        "test": "./node_modules/.bin/cucumber-js features -r features/step_definitions"
+        "test": "grunt cucumberjs && grunt jshint"
     },
     "repository": {
         "type": "git",
