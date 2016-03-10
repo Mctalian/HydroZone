@@ -29,4 +29,9 @@ var sharedSteps = module.exports = function(){
         this.browser.assert.text('input[name=token]', '');
         next();
     });
+
+    this.Then(/^I am on the "([^"]*)" page$/, function(url, next) {
+        this.browser.location.href.should.containEql(url);
+        next();
+    });
 };

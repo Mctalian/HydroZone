@@ -23,3 +23,9 @@ Feature: Home page
         And I enter "anything" into the token field
         And I click the "clearToken" button
         Then the "token" field should be empty
+
+    Scenario: Submitting a valid API Token
+        Given I am on the home page
+        And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
+        And I click the "submitToken" button
+        Then I am on the "dashboard" page
