@@ -31,7 +31,7 @@ angular.module('HydroZone')
             }
 
             // PUBLIC VARS
-            svc.tokenRegExp = new RegExp(/^[A-F,a-f,0-9]{8}-([A-F,a-f,0-9]{4}-){3}[A-F,a-f,0-9]{12}$/);
+            svc.tokenRegExp = new RegExp(/^[A-F,a-f,0-9]{8}-?([A-F,a-f,0-9]{4}-?){3}[A-F,a-f,0-9]{12}$/);
 
             // PUBLIC FUNCTIONS
             svc.validateToken = function validateToken(token) {
