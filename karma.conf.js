@@ -4,6 +4,7 @@ module.exports = function(config) {
         'lib/angular-animate/angular-animate.js',
         'lib/angular-aria/angular-aria.js',
         'lib/angular-material/angular-material.js',
+        'lib/angular-material/angular-material-mocks.js',
         'lib/angular-messages/angular-messages.js',
         'lib/angular-mocks/angular-mocks.js',
         'lib/angular-ui-router/release/angular-ui-router.js'
@@ -35,7 +36,7 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: SRC.reduce(function(result, currentItem) {
-            var noSpecs = currentItem.replace('*.js', '!(*spec).js');
+            var noSpecs = currentItem.replace('*.js', '!(*spec|*.mock).js');
             result[noSpecs] = ['coverage'];
             return result;
         }, {}),
