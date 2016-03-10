@@ -24,6 +24,7 @@ describe('rachioSvc', function() {
 
     describe('validateToken', function() {
         var infoHandler;
+        const PERSON_INFO_URL = 'https://api.rach.io/public/person/info';
 
         afterEach(function() {
             $rootScope.$digest(); // Make sure promises are resolved
@@ -32,12 +33,12 @@ describe('rachioSvc', function() {
         it('should provide the person id if the token is valid', function() {
             var fakeId = "c8d10892-fd69-48b3-8743-f111e4392d8a";
             infoHandler = $httpBackend
-                .whenGET('https://api.rach.io/public/person/info')
+                .whenGET(PERSON_INFO_URL)
                 .respond(200, {
                     "id" : fakeId
                 });
 
-            $httpBackend.expectGET('https://api.rach.io/public/person/info');
+            $httpBackend.expectGET(PERSON_INFO_URL);
 
             rachioSvc.validateToken(goodToken).then(function(response) {
                 expect(response).toBe(fakeId);
@@ -54,7 +55,7 @@ describe('rachioSvc', function() {
 
         it('should return an error if the token is invalid or unauthorized', function() {
             infoHandler = $httpBackend
-                .whenGET('https://api.rach.io/public/person/info')
+                .whenGET(PERSON_INFO_URL)
                 .respond(401, {
                     "errors": [
                         {
@@ -63,7 +64,7 @@ describe('rachioSvc', function() {
                     ]
                 });
 
-            $httpBackend.expectGET('https://api.rach.io/public/person/info');
+            $httpBackend.expectGET(PERSON_INFO_URL);
 
             rachioSvc.validateToken(goodToken).then().catch(function(err) {
                 expect(err.message).toBeDefined();
