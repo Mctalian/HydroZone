@@ -24,7 +24,7 @@ describe('rachioSvc', function() {
 
     describe('validateToken', function() {
         var infoHandler;
-        const PERSON_INFO_URL = 'https://api.rach.io/public/person/info';
+        const PERSON_INFO_URL = 'https://api.rach.io/1/public/person/info';
 
         afterEach(function() {
             $rootScope.$digest(); // Make sure promises are resolved

@@ -6,7 +6,7 @@ angular.module('HydroZone')
             var svc = this;
 
             // PRIVATE VARS
-            const RACH_IO = 'https://api.rach.io/public';
+            const RACH_IO = 'https://api.rach.io/1/public';
             var httpConfig = {
                 headers: {
                     'Content-Type': 'application/json',
