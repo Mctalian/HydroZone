@@ -7,10 +7,27 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
-            <md-input-container class="md-block">
-                <label>Rachio API Token:</label>
-                <input type="text" ng-model="apiToken">
-            </md-input-container>
+            <form name="apiTokenForm">
+                <md-input-container class="md-block">
+                    <label>Rachio API Token</label>
+                    <input
+                        id="apiToken"
+                        name="token"
+                        type="text"
+                        ng-model="apiToken"
+                        ng-pattern="vm.regex"
+                        required>
+                    <div ng-messages="apiTokenForm.token.$error" role="alert">
+                        <div ng-hide="apiTokenForm.token.$valid" ng-message="pattern">API Key is Invalid</div>
+                    </div>
+                </md-input-container>
+                <md-button id="submitToken" class="md-raised md-primary" type="submit" ng-disabled="apiTokenForm.token.$invalid">
+                    Submit
+                </md-button>
+                <md-button id="clearToken" class="md-raised md-warn" type="reset" ng-click="apiToken=''">
+                    Clear
+                </md-button>
+            </form>
         </md-card-content>
     </md-card>
 </div>

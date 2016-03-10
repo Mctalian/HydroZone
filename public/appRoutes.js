@@ -11,7 +11,9 @@ angular.module('HydroZone')
                 // Home page
                 .state('home', {
                     url: '/',
-                    templateUrl: 'home/home.tpl.html'
+                    templateUrl: 'home/home.tpl.html',
+                    controller: 'homeCtrl',
+                    controllerAs: 'vm'
                 });
 
             // Remove '#' from URL
