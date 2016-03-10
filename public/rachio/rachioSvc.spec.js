@@ -1,12 +1,13 @@
 describe('rachioSvc', function() {
 
-    var rachioSvc, $httpBackend, goodToken, badToken;
+    var rachioSvc, $httpBackend, $rootScope, goodToken, badToken;
 
     beforeEach(module('HydroZone'));
 
-    beforeEach(inject(function(_rachioSvc_, _$httpBackend_) {
+    beforeEach(inject(function(_rachioSvc_, _$httpBackend_, _$rootScope_) {
         rachioSvc = _rachioSvc_;
         $httpBackend = _$httpBackend_;
+        $rootScope = _$rootScope_;
 
         goodToken = 'abcdef12-3456-7890-fedc-ba0987654321';
         badToken = 'uvwxyzgh-ijkl-mnop-qrst-uvwxyzghij';
@@ -21,39 +22,37 @@ describe('rachioSvc', function() {
         expect(rachioSvc).toBeDefined();
     });
 
-    describe('setApiToken', function() {
-        it('should allow valid API Tokens', function() {
-            expect(function() {
-                rachioSvc.setApiToken(goodToken);
-            }).not.toThrow();
-        });
-
-        it('should throw a TypeError if the API Token is malformed', function() {
-            // Bad API Key, doesn't use Hex
-            expect(function() {
-                rachioSvc.setApiToken(badToken);
-            }).toThrowError(TypeError);
-        });
-    });
-
     describe('validateToken', function() {
         var infoHandler;
 
-        it('should populate the person id if the token is valid', function() {
+        afterEach(function() {
+            $rootScope.$digest(); // Make sure promises are resolved
+        });
+
+        it('should provide the person id if the token is valid', function() {
+            var fakeId = "c8d10892-fd69-48b3-8743-f111e4392d8a";
             infoHandler = $httpBackend
                 .whenGET('https://api.rach.io/public/person/info')
                 .respond(200, {
-                    "id" : "c8d10892-fd69-48b3-8743-f111e4392d8a"
+                    "id" : fakeId
                 });
 
             $httpBackend.expectGET('https://api.rach.io/public/person/info');
 
-            rachioSvc.validateToken(goodToken);
-            expect(rachioSvc.getPersonId()).not.toThrowError();
+            rachioSvc.validateToken(goodToken).then(function(response) {
+                expect(response).toBe(fakeId);
+            });
+
+            $httpBackend.flush();
         });
 
-        it('should throw an error if the token is invalid', function() {
+        it('should return an error if the token is malformed', function() {
+            rachioSvc.validateToken(badToken).then().catch(function(err) {
+                expect(err.message).toBeDefined();
+            });
+        });
 
+        it('should return an error if the token is invalid or unauthorized', function() {
             infoHandler = $httpBackend
                 .whenGET('https://api.rach.io/public/person/info')
                 .respond(401, {
@@ -66,9 +65,11 @@ describe('rachioSvc', function() {
 
             $httpBackend.expectGET('https://api.rach.io/public/person/info');
 
-            expect(function() {
-                rachioSvc.validateToken(badToken);
-            }).toThrowError(Error);
+            rachioSvc.validateToken(goodToken).then().catch(function(err) {
+                expect(err.message).toBeDefined();
+            });
+
+            $httpBackend.flush();
         });
     });
 });
