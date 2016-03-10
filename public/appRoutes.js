@@ -14,6 +14,11 @@ angular.module('HydroZone')
                     templateUrl: 'home/home.tpl.html',
                     controller: 'homeCtrl',
                     controllerAs: 'vm'
+                })
+
+                .state('dash', {
+                    url: '/dashboard',
+                    template: '<div>This is the dash</div>'
                 });
 
             // Remove '#' from URL

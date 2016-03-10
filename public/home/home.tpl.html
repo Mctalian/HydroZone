@@ -14,17 +14,17 @@
                         id="apiToken"
                         name="token"
                         type="text"
-                        ng-model="apiToken"
+                        ng-model="vm.apiToken"
                         ng-pattern="vm.regex"
                         required>
                     <div ng-messages="apiTokenForm.token.$error" role="alert">
                         <div ng-hide="apiTokenForm.token.$valid" ng-message="pattern">API Key is Invalid</div>
                     </div>
                 </md-input-container>
-                <md-button id="submitToken" class="md-raised md-primary" type="submit" ng-disabled="apiTokenForm.token.$invalid">
+                <md-button id="submitToken" class="md-raised md-primary" type="submit" ng-disabled="apiTokenForm.token.$invalid" ng-click="vm.submit()">
                     Submit
                 </md-button>
-                <md-button id="clearToken" class="md-raised md-warn" type="reset" ng-click="apiToken=''">
+                <md-button id="clearToken" class="md-raised md-warn" type="reset" ng-click="vm.apiToken=''">
                     Clear
                 </md-button>
             </form>
