@@ -41,7 +41,7 @@ angular.module('HydroZone')
                             personId = res.data.id;
                             return resolve(personId);
                         }, function error(res) {
-                            return reject(new Error(res.status + ": " + res.data.errors[0].message));
+                            return reject(new Error(res.status));
                         });
                     }
                     else {
