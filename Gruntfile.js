@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                 reporter: require('jshint-stylish')
             },
 
-            build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js']
+            build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js', '!public/reports/**/*.js']
         },
 
         karma: {
@@ -41,6 +41,9 @@ module.exports = function(grunt) {
             }
         }
     });
+
+    // ALIAS TASKS
+    grunt.registerTask('test', ['jshint', 'cucumberjs', 'karma']);
 
     // LOAD GRUNT PACKAGES
     grunt.loadNpmTasks('grunt-bump');

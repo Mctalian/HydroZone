@@ -6,7 +6,7 @@
     "scripts": {
         "postinstall": "bower install",
         "start": "node server.js",
-        "test": "grunt cucumberjs && grunt jshint"
+        "test": "grunt test"
     },
     "repository": {
         "type": "git",
