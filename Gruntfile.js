@@ -17,15 +17,6 @@ module.exports = function(grunt) {
             }
         },
 
-        jshint: {
-            options: {
-                esversion: 6,
-                reporter: require('jshint-stylish')
-            },
-
-            build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js']
-        },
-
         cucumberjs: {
             options: {
                 format: 'html',
@@ -33,6 +24,15 @@ module.exports = function(grunt) {
                 theme: 'bootstrap'
             },
             features: ['features/**/*.feature']
+        },
+
+        jshint: {
+            options: {
+                esversion: 6,
+                reporter: require('jshint-stylish')
+            },
+
+            build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js']
         }
     });
 
