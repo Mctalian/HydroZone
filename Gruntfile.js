@@ -33,6 +33,12 @@ module.exports = function(grunt) {
             },
 
             build: ['*.js', 'features/**/*.js', 'public/**/*.js', '!public/lib/**/*.js']
+        },
+
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
         }
     });
 
@@ -40,4 +46,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-cucumberjs');
+    grunt.loadNpmTasks('grunt-karma');
 };
