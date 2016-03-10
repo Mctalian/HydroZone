@@ -20,7 +20,7 @@ angular.module('HydroZone')
 
             // PRIVATE FUNCTIONS
             function setApiToken(token) {
-                var re = new RegExp(/^[A-F,a-f,0-9]{8}-([A-F,a-f,0-9]{4}-){3}[A-F,a-f,0-9]{12}$/);
+                var re = svc.tokenRegExp;
                 if (re.test(token)) {
                     apiToken = token;
                     return true;
@@ -29,6 +29,9 @@ angular.module('HydroZone')
                     return false;
                 }
             }
+
+            // PUBLIC VARS
+            svc.tokenRegExp = new RegExp(/^[A-F,a-f,0-9]{8}-([A-F,a-f,0-9]{4}-){3}[A-F,a-f,0-9]{12}$/);
 
             // PUBLIC FUNCTIONS
             svc.validateToken = function validateToken(token) {
