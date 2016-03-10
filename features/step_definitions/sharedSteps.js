@@ -8,10 +8,25 @@ var sharedSteps = module.exports = function(){
 
     this.Given(/^I enter "([^"]*)" into the token field$/, function(text, next) {
         this.browser.fill('#apiToken', text);
+        next();
+    });
+
+    this.Given(/^I click the "([^"]*)" button$/, function(btn, next) {
+        this.browser.pressButton(`#${btn}`, next);
     });
 
     this.Then(/^I should see "([^"]*)"$/, function(text, next) {
         this.browser.text('body').should.containEql(text);
+        next();
+    });
+
+    this.Then(/^the "([^"]*)" button should be "([^"]*)"$/, function(btn, state, next) {
+        this.browser.assert.attribute(`#${btn}`, 'disabled', state === 'disabled' ? state : null);
+        next();
+    });
+
+    this.Then(/^the "([^"]*)" field should be empty$/, function(input, next) {
+        this.browser.assert.text('input[name=token]', '');
         next();
     });
 };
