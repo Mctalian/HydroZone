@@ -6,6 +6,10 @@ var sharedSteps = module.exports = function(){
         this.visit('/', next);
     });
 
+    this.Given(/^I enter "([^"]*)" into the token field$/, function(text, next) {
+        this.browser.fill('#apiToken', text);
+    });
+
     this.Then(/^I should see "([^"]*)"$/, function(text, next) {
         this.browser.text('body').should.containEql(text);
         next();
