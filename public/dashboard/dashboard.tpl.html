@@ -101,5 +101,11 @@
                 </md-button>
             </md-input-container>
         </form>
+        <div layout-padding ng-if="(vm.$mdMedia('sm') || vm.$mdMedia('xs'))">
+            <h4>Selected Zones</h4>
+            <p ng-repeat="zone in vm.getSelectedZones()">
+                {{zone.name}}
+            </p>
+        </div>
     </md-sidenav>
 </div>
