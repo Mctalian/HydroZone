@@ -24,4 +24,16 @@ describe('dashboardCtrl', function() {
     it('should exist', function() {
         expect(ctrl).toBeDefined();
     });
+
+    describe('areZonesSelected', function() {
+        it('should return true if a zone is selected', function() {
+            ctrl.selectedDevice.zones[0].selected = true;
+            expect(ctrl.areZonesSelected()).toBe(true);
+        });
+
+        it('should return false if a zone is not selected', function() {
+            ctrl.selectedDevice.zones[0].selected = false;
+            expect(ctrl.areZonesSelected()).toBe(false);
+        });
+    });
 });

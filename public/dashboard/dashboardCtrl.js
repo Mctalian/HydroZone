@@ -9,6 +9,10 @@ angular.module('HydroZone')
             ctrl.selectedDevice = devices[0];
 
             ctrl.$mdSidenav = $mdSidenav;
+
+            ctrl.areZonesSelected = function() {
+                return _.some(ctrl.selectedDevice.zones, 'selected');
+            };
         }
     ]
 );
