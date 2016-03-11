@@ -77,7 +77,7 @@ angular.module('HydroZone')
 
             svc.startMultiple = function startMultiple(zones, duration) {
                 return $q(function(resolve, reject) {
-                    var data = _.chain(zones)
+                    var data = { "zones": _.chain(zones)
                         .filter(function(zone) {
                             return zone.selected;
                         })
@@ -89,9 +89,10 @@ angular.module('HydroZone')
                             obj.sortOrder = i + 1;
                             return obj;
                         })
-                        .value();
+                        .value()
+                    };
 
-                    $http.post(RACH_IO + '/zone/start_multiple', data, httpConfig).then(function success(res) {
+                    $http.put(RACH_IO + '/zone/start_multiple', data, httpConfig).then(function success(res) {
                         _.forEach(zones, function(zone) {
                             zone.selected = false;
                         });

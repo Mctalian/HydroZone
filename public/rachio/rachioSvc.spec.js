@@ -232,10 +232,10 @@ describe('rachioSvc', function() {
 
         it('should not error when good data is provided  ', function() {
             infoHandler = $httpBackend
-                .whenPOST(ZONE_URL)
+                .whenPUT(ZONE_URL)
                 .respond(204);
 
-            $httpBackend.expectPOST(ZONE_URL);
+            $httpBackend.expectPUT(ZONE_URL);
 
             rachioSvc.startMultiple(zones, 10).then(function(response) {
                 expect(response).toEqual({"status": "OK"});
@@ -248,10 +248,10 @@ describe('rachioSvc', function() {
 
         it('should error if required fields are missing', function() {
             infoHandler = $httpBackend
-                .whenPOST(ZONE_URL)
+                .whenPUT(ZONE_URL)
                 .respond(400);
 
-            $httpBackend.expectPOST(ZONE_URL);
+            $httpBackend.expectPUT(ZONE_URL);
 
             rachioSvc.startMultiple(zones).then().catch(function(err) {
                 expect(err.message).toBeDefined();
