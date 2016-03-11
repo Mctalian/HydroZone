@@ -242,6 +242,8 @@ describe('rachioSvc', function() {
             });
 
             $httpBackend.flush();
+
+            expect(_.every(zones, 'selected')).toBe(false);
         });
 
         it('should error if required fields are missing', function() {

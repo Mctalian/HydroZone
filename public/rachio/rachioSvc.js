@@ -92,6 +92,9 @@ angular.module('HydroZone')
                         .value();
 
                     $http.post(RACH_IO + '/zone/start_multiple', data, httpConfig).then(function success(res) {
+                        _.forEach(zones, function(zone) {
+                            zone.selected = false;
+                        });
                         return resolve({"status": "OK"});
                     }, function error(res) {
                         return reject(new Error(res.status));
