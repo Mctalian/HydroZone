@@ -12,7 +12,6 @@ Feature: Dashboard
         And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
         And I click the "submitToken" button
         Then I should see "Devices"
-        And I should see "Please select a device"
 
     Scenario: Selecting a Device
         Given I am on the dashboard
