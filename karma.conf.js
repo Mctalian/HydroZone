@@ -12,6 +12,7 @@ module.exports = function(config) {
 
     const SRC = [
         '*.js',
+        'dashboard/**/*.js',
         'home/**/*.js',
         'rachio/**/*.js'
     ];
