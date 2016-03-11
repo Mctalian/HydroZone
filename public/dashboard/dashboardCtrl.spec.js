@@ -6,14 +6,14 @@ describe('dashboardCtrl', function() {
     beforeEach(inject(function($controller, _rachioSvcMock_) {
         rachioSvcMock = _rachioSvcMock_;
 
-        devicesMock = {
+        devicesMock = [{
             id: 0,
             zones: [
                 {
                     id: 0
                 }
             ]
-        };
+        }];
 
         ctrl = $controller('dashboardCtrl', {
             rachioSvc: rachioSvcMock,
@@ -23,5 +23,11 @@ describe('dashboardCtrl', function() {
 
     it('should exist', function() {
         expect(ctrl).toBeDefined();
+    });
+
+    describe('devInd', function() {
+        it('should return the index of the device in the devices array', function() {
+            expect(ctrl.devInd(devicesMock[0])).toEqual(0);
+        });
     });
 });

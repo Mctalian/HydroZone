@@ -7,6 +7,10 @@ angular.module('HydroZone')
 
             ctrl.devices = devices;
             ctrl.selectedDevice = devices[0];
+
+            ctrl.devInd = function(device) {
+                return devices.indexOf(device);
+            };
         }
     ]
 );
