@@ -18,7 +18,7 @@ angular.module('HydroZone')
 
                 .state('dash', {
                     url: '/dashboard',
-                    template: '<div>This is the dash</div>'
+                    templateUrl: 'dashboard/dashboard.tpl.html'
                 });
 
             // Remove '#' from URL

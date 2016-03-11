@@ -1,0 +1,35 @@
+<div layout="row" layout-fill>
+    <md-sidenav
+        md-component-id="left"
+        class="md-sidenav-left"
+        md-whiteframe="4"
+        md-is-locked-open="true">
+        <md-content layout-padding>
+            <md-subheader class="md-primary">Devices</md-subheader>
+            <md-list layout-padding>
+                <md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+    <md-content layout-padding>
+        <h3>Please select a device on the left</h3>
+    </md-content>
+    <md-sidenav md-component-id="right" class="md-sidenav-right">
+        <md-subheader class="md-primary">Schedule</md-subheader>
+        <form>
+            <md-input-container>
+                <label>Duration</label>
+                <input
+                    ng-model="duration"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="10800"
+                    required>
+            </md-input-container>
+            <md-input-container>
+                <md-button class="md-raised">Water Zones</md-button>
+            </md-input-container>
+        </form>
+    </md-sidenav>
+</div>
