@@ -33,6 +33,10 @@ angular.module('HydroZone')
                     return $q.reject(new Error());
                 }
             };
+
+            svc.startMultiple = function() {
+                return $q.when({"status": "OK"});
+            };
         }
     ]
 );
