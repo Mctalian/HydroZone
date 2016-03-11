@@ -43,7 +43,7 @@ module.exports = function(grunt) {
     });
 
     // ALIAS TASKS
-    grunt.registerTask('test', ['jshint', 'cucumberjs', 'karma']);
+    grunt.registerTask('test', ['jshint', 'karma', 'cucumberjs']);
 
     // LOAD GRUNT PACKAGES
     grunt.loadNpmTasks('grunt-bump');
