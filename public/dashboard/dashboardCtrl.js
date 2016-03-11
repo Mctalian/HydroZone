@@ -6,6 +6,7 @@ angular.module('HydroZone')
             var ctrl = this;
 
             ctrl.devices = devices;
+            ctrl.selectedDevice = devices[0];
         }
     ]
 );
