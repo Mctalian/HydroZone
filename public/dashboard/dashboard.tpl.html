@@ -54,12 +54,19 @@
                 </md-card-title>
             </md-card>
         </div>
+        <md-button
+            ng-if="vm.areZonesSelected() && (vm.$mdMedia('sm') || vm.$mdMedia('xs'))"
+            class="md-fab md-fab-bottom-right"
+            aria-label="Start Watering"
+            ng-click="vm.$mdSidenav('right').toggle()">
+            <i class="material-icons">&#xE8B8</i>
+        </md-button>
     </md-content>
     <md-sidenav
         md-component-id="right"
         class="md-sidenav-right"
         md-whiteframe="4"
-        md-is-locked-open="vm.areZonesSelected()">
+        md-is-locked-open="vm.areZonesSelected() && $mdMedia('gt-sm')">
         <md-subheader class="md-primary">Schedule</md-subheader>
         <form name="vm.scheduleForm">
             <md-input-container>

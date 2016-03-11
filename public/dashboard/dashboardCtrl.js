@@ -1,8 +1,8 @@
 angular.module('HydroZone')
 .controller('dashboardCtrl',
     [
-        'rachioSvc', 'devices', '$mdSidenav', '$mdToast',
-        function(rachioSvc, devices, $mdSidenav, $mdToast) {
+        'rachioSvc', 'devices', '$mdSidenav', '$mdToast', '$mdMedia',
+        function(rachioSvc, devices, $mdSidenav, $mdToast, $mdMedia) {
             var ctrl = this;
 
             ctrl.devices = devices;
@@ -10,6 +10,7 @@ angular.module('HydroZone')
             ctrl.duration = 0;
 
             ctrl.$mdSidenav = $mdSidenav;
+            ctrl.$mdMedia = $mdMedia;
 
             ctrl.startWatering = function() {
                 rachioSvc.startMultiple(ctrl.selectedDevice.zones, ctrl.duration).then(function() {
