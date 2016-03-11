@@ -17,6 +17,8 @@ angular.module('HydroZone')
             };
             var apiToken;
             var personId;
+            var personObj;
+            var devices;
 
             // PRIVATE FUNCTIONS
             function setApiToken(token) {
@@ -46,6 +48,29 @@ angular.module('HydroZone')
                     }
                     else {
                         return reject(new Error('Malformed API Token'));
+                    }
+                });
+            };
+
+            svc.getDevices = function getDevices(id) {
+                var pId = personId || id;
+
+                return $q(function(resolve, reject) {
+                    if (!pId) {
+                        return reject(new Error(403));
+                    }
+
+                    if (!devices) {
+                        $http.get(RACH_IO + '/person/' + pId, httpConfig).then(function success(res) {
+                            personObj = res.data;
+                            devices = personObj.devices;
+                            return resolve(devices);
+                        }, function error(res) {
+                            return reject(new Error(res.status));
+                        });
+                    }
+                    else {
+                        return resolve(devices);
                     }
                 });
             };
