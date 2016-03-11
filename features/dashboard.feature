@@ -35,4 +35,4 @@ Feature: Dashboard
         And I select "zone-0"
         And I enter "1337" into the "duration" field
         And I click the "waterZones" button
-        Then I should see "Your zones are being watered!"
+        Then "zone-0" should be deselected

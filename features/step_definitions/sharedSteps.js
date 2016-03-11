@@ -15,6 +15,11 @@ var sharedSteps = module.exports = function(){
         next();
     });
 
+    this.Given(/^I enter "([^"]*)" into the "([^"]*)" field$/, function(text, input, next) {
+        this.browser.fill('input[name=' + input + ']', text);
+        next();
+    });
+
     this.Given(/^I click the "([^"]*)" button$/, function(btn, next) {
         this.browser.pressButton(`#${btn}`, next);
     });
@@ -49,5 +54,13 @@ var sharedSteps = module.exports = function(){
     this.Then(/^I return to the home page$/, function(next) {
         this.browser.location.href.should.not.containEql('dashboard');
         next();
+    });
+
+    this.Then(/^"([^"]*)" should be deselected$/, function(btn, next) {
+        var upperThis = this;
+        setTimeout(function() {
+            upperThis.browser.assert.hasNoClass(`#${btn}`, 'selected');
+            next();
+        }, 4000);
     });
 };

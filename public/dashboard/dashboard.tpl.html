@@ -62,11 +62,12 @@
         md-whiteframe="4"
         md-is-locked-open="vm.areZonesSelected()">
         <md-subheader class="md-primary">Schedule</md-subheader>
-        <form>
+        <form name="vm.scheduleForm">
             <md-input-container>
                 <label>Duration</label>
                 <input
-                    ng-model="duration"
+                    ng-model="vm.duration"
+                    name="duration"
                     type="number"
                     step="1"
                     min="0"
@@ -74,7 +75,13 @@
                     required>
             </md-input-container>
             <md-input-container>
-                <md-button class="md-raised">Water Zones</md-button>
+                <md-button
+                    id="waterZones"
+                    class="md-raised md-accent md-hue-2"
+                    ng-disabled="vm.scheduleForm.$invalid"
+                    ng-click="vm.startWatering()">
+                    Water Zones
+                </md-button>
             </md-input-container>
         </form>
     </md-sidenav>
