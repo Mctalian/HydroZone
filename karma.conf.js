@@ -7,7 +7,8 @@ module.exports = function(config) {
         'lib/angular-material/angular-material-mocks.js',
         'lib/angular-messages/angular-messages.js',
         'lib/angular-mocks/angular-mocks.js',
-        'lib/angular-ui-router/release/angular-ui-router.js'
+        'lib/angular-ui-router/release/angular-ui-router.js',
+        'lib/lodash/lodash.js'
     ];
 
     const SRC = [
