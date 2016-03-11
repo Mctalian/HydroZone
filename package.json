@@ -1,6 +1,10 @@
 {
     "name": "HydroZone",
     "version": "1.0.0-rc.0",
+    "engines": {
+        "node": "5.1.0",
+        "npm": "3.3.12"
+    },
     "description": "An application that uses the Rachio public API to water zones.",
     "author": "Robert Anderson <r-anderson.9@onu.edu>",
     "scripts": {
@@ -27,6 +31,7 @@
         "express": "4.13.4"
     },
     "devDependencies": {
+        "bower": "1.7.7",
         "cucumber": "0.9.5",
         "grunt": "0.4.5",
         "grunt-bump": "0.7.0",
