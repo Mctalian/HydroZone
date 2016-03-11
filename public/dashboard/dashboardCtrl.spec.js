@@ -86,4 +86,14 @@ describe('dashboardCtrl', function() {
             expect(_.every(ctrl.selectedDevice.zones, ['selected', false])).toBe(true);
         });
     });
+
+    describe('getSelectedZones', function() {
+        it('should return an array of selected zones', function() {
+            expect(ctrl.getSelectedZones().length).toBe(0);
+
+            ctrl.selectedDevice.zones[0].selected = true;
+
+            expect(ctrl.getSelectedZones().length).toBe(1);
+        });
+    });
 });

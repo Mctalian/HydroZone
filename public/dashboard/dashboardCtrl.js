@@ -35,6 +35,10 @@ angular.module('HydroZone')
                     value.selected = false;
                 });
             };
+
+            ctrl.getSelectedZones = function() {
+                return _.filter(ctrl.selectedDevice.zones, 'selected');
+            };
         }
     ]
 );
