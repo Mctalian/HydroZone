@@ -63,4 +63,9 @@ var sharedSteps = module.exports = function(){
             next();
         }, 4000);
     });
+
+    this.Then(/^all zones should be selected$/, function(next) {
+        this.browser.assert.hasClass('[id^=zone-]', 'selected');
+        next();
+    });
 };

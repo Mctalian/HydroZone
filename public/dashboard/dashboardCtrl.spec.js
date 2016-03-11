@@ -70,4 +70,20 @@ describe('dashboardCtrl', function() {
             expect($mdToast.showSimple).toHaveBeenCalledWith('There was an error, please try again later');
         });
     });
+
+    describe('selectAllZones', function() {
+        it('should cause all zones to be selected', function() {
+            ctrl.selectAllZones();
+
+            expect(_.every(ctrl.selectedDevice.zones, 'selected')).toBe(true);
+        });
+    });
+
+    describe('clearSelectedZones', function() {
+        it('should cause all zones to be deselected', function() {
+            ctrl.clearSelectedZones();
+
+            expect(_.every(ctrl.selectedDevice.zones, ['selected', false])).toBe(true);
+        });
+    });
 });

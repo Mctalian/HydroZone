@@ -36,3 +36,18 @@ Feature: Dashboard
         And I enter "1337" into the "duration" field
         And I click the "waterZones" button
         Then "zone-0" should be deselected
+
+    Scenario: Selecting all zones
+        Given I am on the home page
+        And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
+        And I click the "submitToken" button
+        And I click the "selectAllZones" button
+        Then all zones should be selected
+
+    Scenario: Clearing zone selection
+        Given I am on the home page
+        And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
+        And I click the "submitToken" button
+        And I select "zone-0"
+        And I click the "clearSelectedZones" button
+        Then "zone-0" should be deselected

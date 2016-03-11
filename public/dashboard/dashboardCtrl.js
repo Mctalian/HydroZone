@@ -23,6 +23,18 @@ angular.module('HydroZone')
             ctrl.areZonesSelected = function() {
                 return _.some(ctrl.selectedDevice.zones, 'selected');
             };
+
+            ctrl.selectAllZones = function() {
+                _.each(ctrl.selectedDevice.zones, function(value) {
+                    value.selected = true;
+                });
+            };
+
+            ctrl.clearSelectedZones = function() {
+                _.each(ctrl.selectedDevice.zones, function(value) {
+                    value.selected = false;
+                });
+            };
         }
     ]
 );
