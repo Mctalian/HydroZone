@@ -70,10 +70,11 @@
         md-component-id="right"
         class="md-sidenav-right"
         md-whiteframe="4"
-        md-is-locked-open="vm.areZonesSelected() && $mdMedia('gt-sm')">
-        <md-subheader class="md-primary">Schedule</md-subheader>
+        md-is-locked-open="vm.areZonesSelected() && $mdMedia('gt-sm')"
+        layout="column">
+        <md-subheader class="md-primary">Setup Watering</md-subheader>
         <form name="vm.scheduleForm">
-            <md-input-container>
+            <md-input-container class="md-block">
                 <label>Duration</label>
                 <input
                     ng-model="vm.duration"
@@ -84,12 +85,12 @@
                     max="10800"
                     required>
             </md-input-container>
-            <md-input-container>
+            <md-input-container class="md-block">
                 <md-button
                     id="waterZones"
                     class="md-raised md-accent md-hue-2"
                     ng-disabled="vm.scheduleForm.$invalid"
-                    ng-click="vm.startWatering(); vm.$mdSidenav('right').toggle()">
+                    ng-click="vm.startWatering(); (vm.$mdMedia('sm') || vm.$mdMedia('xs')) ? vm.$mdSidenav('right').toggle() : null;">
                     Water Zones
                 </md-button>
             </md-input-container>
