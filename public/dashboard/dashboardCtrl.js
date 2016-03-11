@@ -1,16 +1,14 @@
 angular.module('HydroZone')
 .controller('dashboardCtrl',
     [
-        'rachioSvc', 'devices',
-        function(rachioSvc, devices) {
+        'rachioSvc', 'devices', '$mdSidenav',
+        function(rachioSvc, devices, $mdSidenav) {
             var ctrl = this;
 
             ctrl.devices = devices;
             ctrl.selectedDevice = devices[0];
 
-            ctrl.devInd = function(device) {
-                return devices.indexOf(device);
-            };
+            ctrl.$mdSidenav = $mdSidenav;
         }
     ]
 );
