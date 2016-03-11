@@ -5,6 +5,8 @@
 ## Summary
 This is a hobby app to try out and make use of Rachio's public API.
 
+[Demo](http://hydrozone.herokuapp.com/) Note: You need a Rachio API Token to access the app.
+
 ## Prerequisites
 - [Node.js](https://nodejs.org/) (`npm` is assumed)
 - [Grunt](gruntjs.com) `npm install -g grunt-cli`
