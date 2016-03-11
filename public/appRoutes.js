@@ -18,7 +18,14 @@ angular.module('HydroZone')
 
                 .state('dash', {
                     url: '/dashboard',
-                    templateUrl: 'dashboard/dashboard.tpl.html'
+                    templateUrl: 'dashboard/dashboard.tpl.html',
+                    controller: 'dashboardCtrl',
+                    controllerAs: 'vm',
+                    resolve: {
+                        devices: ['rachioSvc', function(rachioSvc) {
+                            return rachioSvc.getDevices();
+                        }]
+                    }
                 });
 
             // Remove '#' from URL
