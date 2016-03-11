@@ -12,12 +12,14 @@
 </head>
 
 <body>
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <a ng-href="/">HydroZone</a>
-        </div>
-    </md-toolbar>
-    <md-content ui-view flex></md-content>
+    <md-content layout="column" flex layout-fill>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <a ng-href="/">HydroZone</a>
+            </div>
+        </md-toolbar>
+        <md-content ui-view flex></md-content>
+    </md-content>
 
     <!-- DEPENDENCIES -->
     <script src="/lib/angular/angular.js"></script>
