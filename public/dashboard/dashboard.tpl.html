@@ -5,19 +5,22 @@
         md-whiteframe="4">
         <md-subheader class="md-primary">Devices</md-subheader>
         <md-list>
-            <md-list-item
+            <div
                 id="device-{{$index}}"
-                class="md-3-line"
+                class="md-3-line clickable"
                 ng-repeat="device in vm.devices"
+                ng-class="{'md-accent': vm.selectedDevice === device}"
                 ng-click="vm.selectedDevice = device; vm.$mdSidenav('left').toggle()"
-                ng-class="{'md-accent': vm.selectedDevice === device}">
+                layout="row"
+                layout-align="start center"
+                md-ink-ripple>
                 <md-icon class="md-avatar-icon material-icons">&#xE335;</md-icon>
-                <div class="md-list-item-text">
+                <div class="md-list-item-text" layout="column" layout-align="space-around start" flex>
                     <h3>{{device.name}}</h3>
                     <h5>{{device.status}}</h5>
                     <p>{{device.zones.length}} Zones</p>
                 </div>
-            </md-list-item>
+            </div>
         </md-list>
     </md-sidenav>
     <md-content layout-padding flex>
@@ -29,6 +32,7 @@
         <div layout="row" layout-align="center center" layout-wrap>
             <md-card
                 id="zone-{{$index}}"
+                class="clickable"
                 ng-class="{'md-whiteframe-8dp': zone.hovered, selected: zone.selected}"
                 ng-repeat="zone in vm.selectedDevice.zones | orderBy: 'zoneNumber'"
                 flex-gt-md="20"
@@ -85,7 +89,7 @@
                     id="waterZones"
                     class="md-raised md-accent md-hue-2"
                     ng-disabled="vm.scheduleForm.$invalid"
-                    ng-click="vm.startWatering()">
+                    ng-click="vm.startWatering(); vm.$mdSidenav('right').toggle()">
                     Water Zones
                 </md-button>
             </md-input-container>
