@@ -1,10 +1,12 @@
 describe('dashboardCtrl', function() {
-    var ctrl, rachioSvcMock, devicesMock;
+    var ctrl, rachioSvcMock, devicesMock, $rootScope, $q;
 
     beforeEach(module('HydroZone'));
 
-    beforeEach(inject(function($controller, _rachioSvcMock_) {
+    beforeEach(inject(function($controller, _rachioSvcMock_, _$rootScope_, _$q_) {
         rachioSvcMock = _rachioSvcMock_;
+        $rootScope = _$rootScope_;
+        $q = _$q_;
 
         devicesMock = [{
             id: 0,
@@ -15,9 +17,19 @@ describe('dashboardCtrl', function() {
             ]
         }];
 
+        $mdSidenavMock = {};
+
+        $mdToast = {
+            showSimple: function() {}
+        };
+
+        spyOn($mdToast, 'showSimple');
+
         ctrl = $controller('dashboardCtrl', {
             rachioSvc: rachioSvcMock,
-            devices: devicesMock
+            devices: devicesMock,
+            $mdSidenav: $mdSidenavMock,
+            $mdToast: $mdToast
         });
     }));
 
@@ -34,6 +46,28 @@ describe('dashboardCtrl', function() {
         it('should return false if a zone is not selected', function() {
             ctrl.selectedDevice.zones[0].selected = false;
             expect(ctrl.areZonesSelected()).toBe(false);
+        });
+    });
+
+    describe('startWatering', function() {
+        it('should show a good toast if watering was started', function() {
+            ctrl.startWatering();
+
+            $rootScope.$digest();
+
+            expect($mdToast.showSimple).toHaveBeenCalledWith('Your zones are being watered!');
+        });
+
+        it('should show a bad toast if an error occured', function() {
+            spyOn(rachioSvcMock, 'startMultiple').and.callFake(function() {
+                return $q.reject(new Error());
+            });
+
+            ctrl.startWatering();
+
+            $rootScope.$digest();
+
+            expect($mdToast.showSimple).toHaveBeenCalledWith('There was an error, please try again later');
         });
     });
 });
