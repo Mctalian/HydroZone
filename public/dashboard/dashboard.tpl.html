@@ -1,20 +1,66 @@
-<div layout="row" layout-fill>
+<div layout="row" layout-fill flex>
     <md-sidenav
         md-component-id="left"
         class="md-sidenav-left"
-        md-whiteframe="4"
-        md-is-locked-open="true">
-        <md-content layout-padding>
-            <md-subheader class="md-primary">Devices</md-subheader>
-            <md-list layout-padding>
-                <md-list-item>
-            </md-list>
-        </md-content>
+        md-whiteframe="4">
+        <md-subheader class="md-primary">Devices</md-subheader>
+        <md-list>
+            <md-list-item
+                id="device-{{$index}}"
+                class="md-3-line"
+                ng-repeat="device in vm.devices"
+                ng-click="vm.selectedDevice = device; vm.$mdSidenav('left').toggle()"
+                ng-class="{'md-accent': vm.selectedDevice === device}"
+                ng-init="device.ind = $index">
+                <md-icon class="md-avatar-icon material-icons">&#xE335;</md-icon>
+                <div class="md-list-item-text">
+                    <h3>Device {{device.ind}}</h3>
+                    <h5>{{device.status}}</h5>
+                    <p>{{device.zones.length}} Zones</p>
+                </div>
+            </md-list-item>
+        </md-list>
     </md-sidenav>
-    <md-content layout-padding>
-        <h3>Please select a device on the left</h3>
+    <md-content layout-padding flex>
+        <md-button id="chooseDevice" class="md-raised md-primary md-hue-1" ng-click="vm.$mdSidenav('left').toggle()">
+            Choose Device
+        </md-button>
+        <h3 ng-if="!vm.selectedDevice">Please select a device on the left</h3>
+        <h3>Select the Zones to Water</h3>
+        <div layout="row" layout-align="center center" layout-wrap>
+            <md-card
+                id="zone-{{$index}}"
+                ng-class="{'md-whiteframe-8dp': zone.hovered, selected: zone.selected}"
+                ng-repeat="zone in vm.selectedDevice.zones | orderBy: 'zoneNumber'"
+                flex-gt-md="20"
+                flex-md="25"
+                flex-sm="40"
+                flex="100"
+                ng-mouseenter="zone.hovered = true"
+                ng-mouseleave="zone.hovered = false"
+                ng-click="zone.selected = !zone.selected;"
+                ng-init="zone.selected = false;"
+                md-ink-ripple>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{zone.name}}</span>
+                        <span class="md-subhead">Enabled: {{zone.enabled}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <img
+                            ng-src="{{zone.customNozzle.imageUrl}}"
+                            class="md-media-sm"
+                            alt="{{zone.customNozzle.name}}">
+                    </md-card-title-media>
+                </md-card-title>
+            </md-card>
+        </div>
     </md-content>
-    <md-sidenav md-component-id="right" class="md-sidenav-right">
+    <md-sidenav
+        md-component-id="right"
+        class="md-sidenav-right"
+        md-whiteframe="4"
+        md-is-locked-open="vm.areZonesSelected()">
         <md-subheader class="md-primary">Schedule</md-subheader>
         <form>
             <md-input-container>

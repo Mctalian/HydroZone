@@ -19,6 +19,13 @@ var sharedSteps = module.exports = function(){
         this.browser.pressButton(`#${btn}`, next);
     });
 
+    this.Given(/^I select "([^"]*)"/, function(btn, next) {
+        var upperThis = this;
+        this.browser.fire(`#${btn}`, 'mousedown', function() {
+            upperThis.browser.fire(`#${btn}`, 'mousedown', next);
+        });
+    });
+
     this.Then(/^I should see "([^"]*)"$/, function(text, next) {
         this.browser.text('body').should.containEql(text);
         next();

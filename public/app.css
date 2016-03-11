@@ -1,3 +1,16 @@
-md-content.main {
-    background: #777;
+.md-list-item-text h3, .md-list-item-text h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+md-card {
+    transition: box-shadow 0.2s;
+}
+
+md-card[md-ink-ripple] {
+  position: relative;
+}
+
+md-card.selected {
+    background-color: #00BCD4;
 }
