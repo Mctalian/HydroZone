@@ -26,7 +26,7 @@ Feature: Dashboard
         And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
         And I click the "submitToken" button
         And I select "zone-0"
-        Then I should see "Schedule"
+        Then I should see "Setup Watering"
 
     Scenario: Scheduling zone watering
         Given I am on the home page
