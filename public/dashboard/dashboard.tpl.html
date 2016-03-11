@@ -10,11 +10,10 @@
                 class="md-3-line"
                 ng-repeat="device in vm.devices"
                 ng-click="vm.selectedDevice = device; vm.$mdSidenav('left').toggle()"
-                ng-class="{'md-accent': vm.selectedDevice === device}"
-                ng-init="device.ind = $index">
+                ng-class="{'md-accent': vm.selectedDevice === device}">
                 <md-icon class="md-avatar-icon material-icons">&#xE335;</md-icon>
                 <div class="md-list-item-text">
-                    <h3>Device {{device.ind}}</h3>
+                    <h3>{{device.name}}</h3>
                     <h5>{{device.status}}</h5>
                     <p>{{device.zones.length}} Zones</p>
                 </div>
@@ -22,10 +21,10 @@
         </md-list>
     </md-sidenav>
     <md-content layout-padding flex>
+        <h2>{{vm.selectedDevice.name}}</h2>
         <md-button id="chooseDevice" class="md-raised md-primary md-hue-1" ng-click="vm.$mdSidenav('left').toggle()">
             Choose Device
         </md-button>
-        <h3 ng-if="!vm.selectedDevice">Please select a device on the left</h3>
         <h3>Select the Zones to Water</h3>
         <div layout="row" layout-align="center center" layout-wrap>
             <md-card
