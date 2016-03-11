@@ -74,6 +74,30 @@ angular.module('HydroZone')
                     }
                 });
             };
+
+            svc.startMultiple = function startMultiple(zones, duration) {
+                return $q(function(resolve, reject) {
+                    var data = _.chain(zones)
+                        .filter(function(zone) {
+                            return zone.selected;
+                        })
+                        .sortBy('zoneNumber')
+                        .map(function(zone, i) {
+                            var obj = {};
+                            obj.id = zone.id;
+                            obj.duration = duration;
+                            obj.sortOrder = i + 1;
+                            return obj;
+                        })
+                        .value();
+
+                    $http.post(RACH_IO + '/zone/start_multiple', data, httpConfig).then(function success(res) {
+                        return resolve({"status": "OK"});
+                    }, function error(res) {
+                        return reject(new Error(res.status));
+                    });
+                });
+            };
         }
     ]
 );

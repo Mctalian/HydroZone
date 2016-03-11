@@ -198,4 +198,64 @@ describe('rachioSvc', function() {
             });
         });
     });
+
+    describe('startMultiple', function() {
+        var infoHandler;
+        const ZONE_URL = 'https://api.rach.io/1/public/zone/start_multiple';
+        var zones = [
+            {
+                "id":"e02de192-5a2b-4669-95c6-34deea3d23cb",
+                "zoneNumber":3,
+                "name":"Zone 3",
+                "enabled":false,
+                "customNozzle":{
+                    "name":"Fixed Spray Head",
+                    "imageUrl":"https://s3-us-west-2.amazonaws.com/rachio-api-icons/nozzle/fixed_spray.png",
+                    "category":"FIXED_SPRAY_HEAD",
+                    "inchesPerHour":1.4
+                },
+                "availableWater":0.17,
+                "rootZoneDepth":10,
+                "managementAllowedDepletion":0.5,
+                "efficiency":0.6,
+                "yardAreaSquareFeet":1000,
+                "irrigationAmount":0,
+                "depthOfWater":0.85,
+                "runtime":3643,
+                "selected": true
+            }
+        ];
+
+        afterEach(function() {
+            $rootScope.$digest(); // Make sure promises are resolved
+        });
+
+        it('should not error when good data is provided  ', function() {
+            infoHandler = $httpBackend
+                .whenPOST(ZONE_URL)
+                .respond(204);
+
+            $httpBackend.expectPOST(ZONE_URL);
+
+            rachioSvc.startMultiple(zones, 10).then(function(response) {
+                expect(response).toEqual({"status": "OK"});
+            });
+
+            $httpBackend.flush();
+        });
+
+        it('should error if required fields are missing', function() {
+            infoHandler = $httpBackend
+                .whenPOST(ZONE_URL)
+                .respond(400);
+
+            $httpBackend.expectPOST(ZONE_URL);
+
+            rachioSvc.startMultiple(zones).then().catch(function(err) {
+                expect(err.message).toBeDefined();
+            });
+
+            $httpBackend.flush();
+        });
+    });
 });
