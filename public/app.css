@@ -76,3 +76,11 @@ div.md-list-item-text p {
     line-height: 1.6em;
     color: rgba(0,0,0,0.54);
 }
+
+div.loading {
+    position:absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.4);
+}
