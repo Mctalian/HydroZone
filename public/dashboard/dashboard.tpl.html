@@ -1,126 +1,124 @@
-<div layout="row" layout-fill flex>
-    <md-sidenav
-        md-component-id="left"
-        class="md-sidenav-left"
-        md-whiteframe="4">
-        <md-subheader class="md-primary">Devices</md-subheader>
-        <md-list>
-            <div
-                id="device-{{$index}}"
-                class="md-3-line clickable"
-                ng-repeat="device in vm.devices"
-                ng-class="{'md-accent': vm.selectedDevice === device}"
-                ng-click="vm.selectedDevice = device; vm.$mdSidenav('left').toggle()"
-                layout="row"
-                layout-align="start center"
-                md-ink-ripple>
-                <md-icon class="md-avatar-icon material-icons">&#xE335;</md-icon>
-                <div class="md-list-item-text" layout="column" layout-align="space-around start" flex>
-                    <h3>{{device.name}}</h3>
-                    <h5>{{device.status}}</h5>
-                    <p>{{device.zones.length}} Zones</p>
-                </div>
+<md-sidenav
+    md-component-id="left"
+    class="md-sidenav-left"
+    md-whiteframe="4">
+    <md-subheader class="md-primary">Devices</md-subheader>
+    <md-list>
+        <div
+            id="device-{{$index}}"
+            class="md-3-line clickable"
+            ng-repeat="device in vm.devices"
+            ng-class="{'md-accent': vm.selectedDevice === device}"
+            ng-click="vm.selectedDevice = device; vm.$mdSidenav('left').toggle()"
+            layout="row"
+            layout-align="start center"
+            md-ink-ripple>
+            <md-icon class="md-avatar-icon material-icons">&#xE335;</md-icon>
+            <div class="md-list-item-text" layout="column" layout-align="space-around start" flex>
+                <h3>{{device.name}}</h3>
+                <h5>{{device.status}}</h5>
+                <p>{{device.zones.length}} Zones</p>
             </div>
-        </md-list>
-    </md-sidenav>
-    <md-content layout-padding flex>
-        <h2>{{vm.selectedDevice.name}}</h2>
-        <md-button
-            id="chooseDevice"
-            class="md-raised md-primary md-hue-1"
-            ng-click="vm.$mdSidenav('left').toggle()"
-            ng-disabled="vm.disableAll">
-            Choose Device
-        </md-button>
-        <h3>Select the Zones to Water</h3>
-        <md-button
-            id="selectAllZones"
-            class="md-raised md-accent md-hue-3"
-            ng-click="vm.selectAllZones()"
-            ng-disabled="vm.disableAll">
-            Select All
-        </md-button>
-        <md-button
-            id="clearSelectedZones"
-            ng-show="vm.areZonesSelected()"
-            class="md-raised md-warn"
-            ng-click="vm.clearSelectedZones()"
-            ng-disabled="vm.disableAll">
-            Clear Selection
-        </md-button>
-        <div layout="row" layout-align="center center" layout-wrap>
-            <md-card
-                id="zone-{{$index}}"
-                ng-class="{clickable: !vm.disableAll, selected: zone.selected}"
-                ng-repeat="zone in vm.selectedDevice.zones | orderBy: 'zoneNumber'"
-                flex-gt-md="20"
-                flex-md="25"
-                flex-sm="40"
-                flex="100"
-                ng-click="vm.disableAll ? null : zone.selected = !zone.selected;"
-                ng-init="zone.selected = false;"
-                md-ink-ripple="{{!vm.disableAll}}">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">{{zone.name}}</span>
-                        <span class="md-subhead">Enabled: {{zone.enabled}}</span>
-                    </md-card-title-text>
-                    <md-card-title-media>
-                        <img
-                            ng-src="{{zone.customNozzle.imageUrl}}"
-                            class="md-media-sm"
-                            alt="{{zone.customNozzle.name}}">
-                    </md-card-title-media>
-                </md-card-title>
-            </md-card>
         </div>
-        <md-button
-            ng-if="vm.areZonesSelected() && (vm.$mdMedia('sm') || vm.$mdMedia('xs'))"
-            class="md-fab md-fab-bottom-right"
-            aria-label="Start Watering"
-            ng-click="vm.$mdSidenav('right').toggle()"
-            ng-disabled="vm.disableAll">
-            <i class="material-icons">&#xE8B8</i>
-        </md-button>
-    </md-content>
-    <md-sidenav
-        md-component-id="right"
-        class="md-sidenav-right"
-        md-whiteframe="4"
-        md-is-locked-open="vm.areZonesSelected() && $mdMedia('gt-sm')"
-        layout="column">
-        <md-subheader class="md-primary">Setup Watering</md-subheader>
-        <form name="vm.scheduleForm">
-            <md-input-container class="md-block">
-                <label>Duration</label>
-                <input
-                    ng-model="vm.duration"
-                    name="duration"
-                    type="number"
-                    step="1"
-                    min="0"
-                    max="10800"
-                    required
-                    ng-disabled="vm.disableAll">
-            </md-input-container>
-            <md-input-container class="md-block">
-                <md-button
-                    id="waterZones"
-                    class="md-raised md-primary"
-                    ng-disabled="vm.scheduleForm.$invalid || vm.disableAll"
-                    ng-click="vm.startWatering(); (vm.$mdMedia('sm') || vm.$mdMedia('xs')) ? vm.$mdSidenav('right').toggle() : null;">
-                    Water Zones
-                </md-button>
-            </md-input-container>
-        </form>
-        <div layout-padding ng-if="(vm.$mdMedia('sm') || vm.$mdMedia('xs'))">
-            <h4>Selected Zones</h4>
-            <p ng-repeat="zone in vm.getSelectedZones() | orderBy: 'zoneNumber'">
-                {{zone.name}}
-            </p>
-        </div>
-    </md-sidenav>
-</div>
+    </md-list>
+</md-sidenav>
+<md-content layout-padding flex>
+    <h2>{{vm.selectedDevice.name}}</h2>
+    <md-button
+        id="chooseDevice"
+        class="md-raised md-primary md-hue-1"
+        ng-click="vm.$mdSidenav('left').toggle()"
+        ng-disabled="vm.disableAll">
+        Choose Device
+    </md-button>
+    <h3>Select the Zones to Water</h3>
+    <md-button
+        id="selectAllZones"
+        class="md-raised md-accent md-hue-3"
+        ng-click="vm.selectAllZones()"
+        ng-disabled="vm.disableAll">
+        Select All
+    </md-button>
+    <md-button
+        id="clearSelectedZones"
+        ng-show="vm.areZonesSelected()"
+        class="md-raised md-warn"
+        ng-click="vm.clearSelectedZones()"
+        ng-disabled="vm.disableAll">
+        Clear Selection
+    </md-button>
+    <div layout="row" layout-align="center center" layout-wrap>
+        <md-card
+            id="zone-{{$index}}"
+            ng-class="{clickable: !vm.disableAll, selected: zone.selected}"
+            ng-repeat="zone in vm.selectedDevice.zones | orderBy: 'zoneNumber'"
+            flex-gt-md="20"
+            flex-md="25"
+            flex-sm="40"
+            flex="100"
+            ng-click="vm.disableAll ? null : zone.selected = !zone.selected;"
+            ng-init="zone.selected = false;"
+            md-ink-ripple="{{!vm.disableAll}}">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{zone.name}}</span>
+                    <span class="md-subhead">Enabled: {{zone.enabled}}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <img
+                        ng-src="{{zone.customNozzle.imageUrl}}"
+                        class="md-media-sm"
+                        alt="{{zone.customNozzle.name}}">
+                </md-card-title-media>
+            </md-card-title>
+        </md-card>
+    </div>
+    <md-button
+        ng-if="vm.areZonesSelected() && (vm.$mdMedia('sm') || vm.$mdMedia('xs'))"
+        class="md-fab md-fab-bottom-right"
+        aria-label="Start Watering"
+        ng-click="vm.$mdSidenav('right').toggle()"
+        ng-disabled="vm.disableAll">
+        <i class="material-icons">&#xE8B8</i>
+    </md-button>
+</md-content>
+<md-sidenav
+    md-component-id="right"
+    class="md-sidenav-right"
+    md-whiteframe="4"
+    md-is-locked-open="vm.areZonesSelected() && $mdMedia('gt-sm')"
+    layout="column">
+    <md-subheader class="md-primary">Setup Watering</md-subheader>
+    <form name="vm.scheduleForm">
+        <md-input-container class="md-block">
+            <label>Duration</label>
+            <input
+                ng-model="vm.duration"
+                name="duration"
+                type="number"
+                step="1"
+                min="0"
+                max="10800"
+                required
+                ng-disabled="vm.disableAll">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-button
+                id="waterZones"
+                class="md-raised md-primary"
+                ng-disabled="vm.scheduleForm.$invalid || vm.disableAll"
+                ng-click="vm.startWatering(); (vm.$mdMedia('sm') || vm.$mdMedia('xs')) ? vm.$mdSidenav('right').toggle() : null;">
+                Water Zones
+            </md-button>
+        </md-input-container>
+    </form>
+    <div layout-padding ng-if="(vm.$mdMedia('sm') || vm.$mdMedia('xs'))">
+        <h4>Selected Zones</h4>
+        <p ng-repeat="zone in vm.getSelectedZones() | orderBy: 'zoneNumber'">
+            {{zone.name}}
+        </p>
+    </div>
+</md-sidenav>
 <div ng-if="vm.disableAll" class="loading" layout-fill layout="column" layout-align="center center">
     <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
 </div>
