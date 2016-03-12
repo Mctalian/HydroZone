@@ -115,7 +115,7 @@
         </form>
         <div layout-padding ng-if="(vm.$mdMedia('sm') || vm.$mdMedia('xs'))">
             <h4>Selected Zones</h4>
-            <p ng-repeat="zone in vm.getSelectedZones()">
+            <p ng-repeat="zone in vm.getSelectedZones() | orderBy: 'zoneNumber'">
                 {{zone.name}}
             </p>
         </div>
