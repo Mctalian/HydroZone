@@ -8,24 +8,13 @@ Feature: Home page
         Then I should see "HydroZone"
         And I should see "API Token"
 
-    Scenario: Entering a valid API Token
-        Given I am on the home page
-        And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
-        Then the "submitToken" button should be "enabled"
-
     Scenario: Entering an invalid API Token
         Given I am on the home page
         And I enter "zqwplkmx-92a6-4913-b83c-64cc713cbc1e" into the token field
-        Then the "submitToken" button should be "disabled"
+        Then I should see "API Key is Invalid"
 
-    Scenario: Clicking the clear button
-        Given I am on the home page
-        And I enter "anything" into the token field
-        And I click the "clearToken" button
-        Then the "token" field should be empty
-
-    Scenario: Submitting a valid API Token
-        Given I am on the home page
-        And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
-        And I click the "submitToken" button
-        Then I am on the "dashboard" page
+    # Scenario: Submitting a valid API Token
+    #     Given I am on the home page
+    #     And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
+    #     And I wait
+    #     Then I am on the "dashboard" page
