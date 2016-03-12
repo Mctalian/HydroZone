@@ -1,4 +1,4 @@
-<div class="center" flex-gt-xs="50" flex>
+<div layout="column" layout-align="center center" layout-fill flex>
     <md-card>
         <md-card-title>
             <md-card-title-text>
@@ -15,19 +15,19 @@
                         name="token"
                         type="text"
                         ng-model="vm.apiToken"
+                        ng-model-options="{ debounce: 500 }"
                         ng-pattern="vm.regex"
+                        ng-change="vm.submit()"
+                        ng-disabled="vm.disableAll"
                         required>
                     <div ng-messages="apiTokenForm.token.$error" role="alert">
                         <div ng-hide="apiTokenForm.token.$valid" ng-message="pattern">API Key is Invalid</div>
                     </div>
                 </md-input-container>
-                <md-button id="submitToken" class="md-raised md-primary" type="submit" ng-disabled="apiTokenForm.token.$invalid" ng-click="vm.submit()">
-                    Submit
-                </md-button>
-                <md-button id="clearToken" class="md-raised md-warn" type="reset" ng-click="vm.apiToken=''">
-                    Clear
-                </md-button>
             </form>
         </md-card-content>
     </md-card>
+</div>
+<div ng-show="vm.disableAll" class="loading" layout-fill layout="column" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
 </div>
