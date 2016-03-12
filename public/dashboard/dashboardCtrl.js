@@ -8,13 +8,16 @@ angular.module('HydroZone')
             ctrl.devices = devices;
             ctrl.selectedDevice = devices[0];
             ctrl.duration = 0;
+            ctrl.disableAll = false;
 
             ctrl.$mdSidenav = $mdSidenav;
             ctrl.$mdMedia = $mdMedia;
 
             ctrl.startWatering = function() {
+                ctrl.disableAll = true;
                 rachioSvc.startMultiple(ctrl.selectedDevice.zones, ctrl.duration).then(function() {
                     $mdToast.showSimple('Your zones are being watered!');
+                    ctrl.disableAll = false;
                 }).catch(function() {
                     $mdToast.showSimple('There was an error, please try again later');
                 });

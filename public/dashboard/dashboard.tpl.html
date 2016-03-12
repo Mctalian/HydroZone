@@ -25,31 +25,41 @@
     </md-sidenav>
     <md-content layout-padding flex>
         <h2>{{vm.selectedDevice.name}}</h2>
-        <md-button id="chooseDevice" class="md-raised md-primary md-hue-1" ng-click="vm.$mdSidenav('left').toggle()">
+        <md-button
+            id="chooseDevice"
+            class="md-raised md-primary md-hue-1"
+            ng-click="vm.$mdSidenav('left').toggle()"
+            ng-disabled="vm.disableAll">
             Choose Device
         </md-button>
         <h3>Select the Zones to Water</h3>
-        <md-button id="selectAllZones" class="md-raised md-accent md-hue-3" ng-click="vm.selectAllZones()">
+        <md-button
+            id="selectAllZones"
+            class="md-raised md-accent md-hue-3"
+            ng-click="vm.selectAllZones()"
+            ng-disabled="vm.disableAll">
             Select All
         </md-button>
-        <md-button id="clearSelectedZones" ng-show="vm.areZonesSelected()" class="md-raised md-warn" ng-click="vm.clearSelectedZones()">
+        <md-button
+            id="clearSelectedZones"
+            ng-show="vm.areZonesSelected()"
+            class="md-raised md-warn"
+            ng-click="vm.clearSelectedZones()"
+            ng-disabled="vm.disableAll">
             Clear Selection
         </md-button>
         <div layout="row" layout-align="center center" layout-wrap>
             <md-card
                 id="zone-{{$index}}"
-                class="clickable"
-                ng-class="{'md-whiteframe-8dp': zone.hovered, selected: zone.selected}"
+                ng-class="{clickable: !vm.disableAll, selected: zone.selected}"
                 ng-repeat="zone in vm.selectedDevice.zones | orderBy: 'zoneNumber'"
                 flex-gt-md="20"
                 flex-md="25"
                 flex-sm="40"
                 flex="100"
-                ng-mouseenter="zone.hovered = true"
-                ng-mouseleave="zone.hovered = false"
-                ng-click="zone.selected = !zone.selected;"
+                ng-click="vm.disableAll ? null : zone.selected = !zone.selected;"
                 ng-init="zone.selected = false;"
-                md-ink-ripple>
+                md-ink-ripple="{{!vm.disableAll}}">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{zone.name}}</span>
@@ -68,7 +78,8 @@
             ng-if="vm.areZonesSelected() && (vm.$mdMedia('sm') || vm.$mdMedia('xs'))"
             class="md-fab md-fab-bottom-right"
             aria-label="Start Watering"
-            ng-click="vm.$mdSidenav('right').toggle()">
+            ng-click="vm.$mdSidenav('right').toggle()"
+            ng-disabled="vm.disableAll">
             <i class="material-icons">&#xE8B8</i>
         </md-button>
     </md-content>
@@ -89,13 +100,14 @@
                     step="1"
                     min="0"
                     max="10800"
-                    required>
+                    required
+                    ng-disabled="vm.disableAll">
             </md-input-container>
             <md-input-container class="md-block">
                 <md-button
                     id="waterZones"
                     class="md-raised md-primary"
-                    ng-disabled="vm.scheduleForm.$invalid"
+                    ng-disabled="vm.scheduleForm.$invalid || vm.disableAll"
                     ng-click="vm.startWatering(); (vm.$mdMedia('sm') || vm.$mdMedia('xs')) ? vm.$mdSidenav('right').toggle() : null;">
                     Water Zones
                 </md-button>
