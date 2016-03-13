@@ -1,6 +1,6 @@
 {
     "name": "HydroZone",
-    "version": "1.0.0-rc.1",
+    "version": "1.0.0",
     "engines": {
         "node": "5.1.0",
         "npm": "3.3.12"
