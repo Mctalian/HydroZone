@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <base href="/">
-    <title>HydroZone</title>
+    <title ng-controller="titleCtrl as title">HydroZone | {{title.get()}}</title>
 
     <!-- FAVICON -->
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
@@ -44,6 +44,8 @@
     <script src="/dashboard/dashboardCtrl.js"></script>
     <script src="/home/homeCtrl.js"></script>
     <script src="/rachio/rachioSvc.js"></script>
+    <script src="/title/titleCtrl.js"></script>
+    <script src="/title/titleSvc.js"></script>
     <script src="/toolbar/toolbarCtrl.js"></script>
 </body>
 </html>
