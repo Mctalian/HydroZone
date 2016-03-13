@@ -46,6 +46,7 @@
         "karma-jasmine": "0.3.7",
         "karma-phantomjs-launcher": "1.0.0",
         "phantomjs-prebuilt": "2.1.5",
+        "selenium-webdriver": "2.52.0",
         "should": "8.2.2",
         "zombie": "4.2.1"
     },
