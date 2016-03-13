@@ -11,8 +11,18 @@ var sharedSteps = module.exports = function(){
         next();
     });
 
+    this.Given(/^I am on the dashboard$/, {timeout: 10*1000}, function(next) {
+        this.get('/');
+        this.driver.findElement(By.id('apiToken')).sendKeys('c3667b81-92a6-4913-b83c-64cc713cbc1e');
+        this.driver.wait(until.titleContains('Dashboard')).then(function(value) {
+            assert(value);
+            next();
+        });
+    });
+
     this.Given(/^I navigate directly to the dashboard$/, function(next) {
-        this.visit('/dashboard', next);
+        this.get('/dashboard');
+        next();
     });
 
     this.Given(/^I enter "([^"]*)" into the token field$/, function(text, next) {
@@ -21,19 +31,19 @@ var sharedSteps = module.exports = function(){
     });
 
     this.Given(/^I enter "([^"]*)" into the "([^"]*)" field$/, function(text, input, next) {
-        this.browser.fill('input[name=' + input + ']', text);
-        next();
+        this.driver.findElement(By.name(input)).sendKeys(text).then(function() {
+            next();
+        });
     });
 
     this.Given(/^I click the "([^"]*)" button$/, function(btn, next) {
-        this.browser.pressButton(`#${btn}`, next);
+        this.driver.findElement(By.id(`${btn}`)).click();
+        next();
     });
 
-    this.Given(/^I select "([^"]*)"/, function(btn, next) {
-        var upperThis = this;
-        this.browser.fire(`#${btn}`, 'mousedown', function() {
-            upperThis.browser.fire(`#${btn}`, 'mousedown', next);
-        });
+    this.Given(/^I select "([^"]*)"/, {timeout: 10*1000}, function(btn, next) {
+        this.driver.findElement(By.id(`${btn}`)).click();
+        next();
     });
 
     this.Then(/^I should see "([^"]*)"$/, {timeout: 10*1000}, function(text, next) {
@@ -43,19 +53,30 @@ var sharedSteps = module.exports = function(){
         });
     });
 
-    this.Then(/^the element with id "([^"]*)" should be visible on the page$/, function(id, next) {
-        this.driver.wait(until.elementIsVisible(this.driver.findElement(By.id('id'))))
-            .then(next);
+    this.Then(/^the element with id "([^"]*)" should be visible on the page$/, {timeout: 10*1000}, function(id, next) {
+        var outerThis = this;
+        this.driver.wait(until.elementLocated(By.id(id))).then(function() {
+            setTimeout(function() {
+                outerThis.driver.findElement(By.id(id)).isDisplayed().then(function(visible) {
+                    assert(visible);
+                    next();
+                });
+            }, 2000);
+        });
     });
 
-    this.Then(/^the "([^"]*)" button should be "([^"]*)"$/, function(btn, state, next) {
-        this.browser.assert.attribute(`#${btn}`, 'disabled', state === 'disabled' ? state : null);
-        next();
+    this.Then(/^the "([^"]*)" button should be "([^"]*)"$/, function(btn, desired, next) {
+        this.driver.findElement(By.id(`${btn}`)).getAttribute('disabled').then(function(state) {
+            assert(desired === state);
+            next();
+        });
     });
 
     this.Then(/^the "([^"]*)" field should be empty$/, function(input, next) {
-        this.browser.assert.text('input[name=token]', '');
-        next();
+        this.driver.findElement(By.name(input)).getAttribute('value').then(function(value) {
+            assert(value === '');
+            next();
+        });
     });
 
     this.Then(/^I am on the "([^"]*)" page$/, {timeout: 10*1000}, function(title, next) {
@@ -65,21 +86,24 @@ var sharedSteps = module.exports = function(){
         });
     });
 
-    this.Then(/^I return to the home page$/, function(next) {
-        this.browser.location.href.should.not.containEql('dashboard');
-        next();
+    this.Then(/^I return to the home page$/, {timeout: 10*1000}, function(next) {
+        this.driver.wait(until.titleContains('Sign In')).then(function(value) {
+            assert(value);
+            next();
+        });
     });
 
     this.Then(/^"([^"]*)" should be deselected$/, function(btn, next) {
-        var upperThis = this;
-        setTimeout(function() {
-            upperThis.browser.assert.hasNoClass(`#${btn}`, 'selected');
+        this.driver.findElement(By.id(`${btn}`)).getAttribute('class').then(function(classes) {
+            assert(!_.includes(classes, 'selected'));
             next();
-        }, 4000);
+        });
     });
 
-    this.Then(/^all zones should be selected$/, function(next) {
-        this.browser.assert.hasClass('[id^=zone-]', 'selected');
-        next();
+    this.Then(/^all zones should be selected$/, {timeout: 15*1000}, function(next) {
+        var zones = this.driver.findElements(By.css('[id^=zone-].selected')).then(function(elements) {
+            assert(elements.length === 8);
+            next();
+        });
     });
 };

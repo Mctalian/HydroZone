@@ -12,7 +12,7 @@ Feature: Home page
     Scenario: Entering an invalid API Token
         Given I am on the home page
         And I enter "zqwplkmx-92a6-4913-b83c-64cc713cbc1e" into the token field
-        Then I should see "API Key is Invalid"
+        Then the element with id "invalidKey" should be visible on the page
 
     Scenario: Submitting a valid API Token
         Given I am on the home page
