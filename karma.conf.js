@@ -15,7 +15,8 @@ module.exports = function(config) {
         '*.js',
         'dashboard/**/*.js',
         'home/**/*.js',
-        'rachio/**/*.js'
+        'rachio/**/*.js',
+        'toolbar/**/*.js'
     ];
 
     config.set({

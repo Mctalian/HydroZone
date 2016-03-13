@@ -14,9 +14,13 @@
 
 <body>
     <md-content layout="column" flex layout-fill>
-        <md-toolbar>
+        <md-toolbar ng-controller="toolbarCtrl as tb">
             <div class="md-toolbar-tools">
                 HydroZone
+                <span flex></span>
+                <md-button ng-if="!tb.isHomeState()"aria-label="New API Key" ng-href="/">
+                  New API Key
+                </md-button>
             </div>
         </md-toolbar>
         <md-content layout="row" ui-view flex layout-fill></md-content>
@@ -37,5 +41,6 @@
     <script src="/dashboard/dashboardCtrl.js"></script>
     <script src="/home/homeCtrl.js"></script>
     <script src="/rachio/rachioSvc.js"></script>
+    <script src="/toolbar/toolbarCtrl.js"></script>
 </body>
 </html>
