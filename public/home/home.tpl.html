@@ -19,10 +19,8 @@
                         ng-pattern="vm.regex"
                         ng-change="vm.submit()"
                         ng-disabled="vm.disableAll"
-                        required>
-                    <div ng-messages="apiTokenForm.token.$error" role="alert">
-                        <div id="invalidKey" ng-hide="apiTokenForm.token.$valid" ng-message="pattern">API Key is Invalid</div>
-                    </div>
+                        required/>
+                    <div id="invalidKey" ng-show="apiTokenForm.token.$error.pattern" role="alert">API Key is Invalid</div>
                 </md-input-container>
             </form>
         </md-card-content>
