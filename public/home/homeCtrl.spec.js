@@ -1,9 +1,9 @@
 describe('homeCtrl', function() {
-    var ctrl, rachioSvcMock, $state, $mdToast, $rootScope;
+    var ctrl, rachioSvcMock, $state, $mdToast, $rootScope, titleSvc;
 
     beforeEach(module('HydroZone'));
 
-    beforeEach(inject(function($controller, _rachioSvcMock_, _$rootScope_) {
+    beforeEach(inject(function($controller, _rachioSvcMock_, _$rootScope_, _titleSvc_) {
         rachioSvcMock = _rachioSvcMock_;
         $state = {
             go: function() {}
@@ -12,6 +12,7 @@ describe('homeCtrl', function() {
             showSimple: function() {}
         };
         $rootScope = _$rootScope_;
+        titleSvc = _titleSvc_;
 
         spyOn($state, 'go');
         spyOn($mdToast, 'showSimple');
@@ -19,7 +20,8 @@ describe('homeCtrl', function() {
         ctrl = $controller('homeCtrl', {
             rachioSvc: rachioSvcMock,
             $state: $state,
-            $mdToast: $mdToast
+            $mdToast: $mdToast,
+            titleSvc: titleSvc
         });
     }));
 

@@ -1,9 +1,11 @@
 angular.module('HydroZone')
 .controller('homeCtrl',
     [
-        'rachioSvc', '$state', '$mdToast',
-        function(rachioSvc, $state, $mdToast) {
+        'rachioSvc', '$state', '$mdToast', 'titleSvc',
+        function(rachioSvc, $state, $mdToast, titleSvc) {
             var ctrl = this;
+
+            titleSvc.set('Sign In');
 
             ctrl.regex = rachioSvc.tokenRegExp;
             ctrl.disableAll = false;

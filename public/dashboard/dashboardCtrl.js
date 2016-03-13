@@ -1,8 +1,8 @@
 angular.module('HydroZone')
 .controller('dashboardCtrl',
     [
-        'rachioSvc', 'devices', '$mdSidenav', '$mdToast', '$mdMedia',
-        function(rachioSvc, devices, $mdSidenav, $mdToast, $mdMedia) {
+        'rachioSvc', 'devices', '$mdSidenav', '$mdToast', '$mdMedia', 'titleSvc',
+        function(rachioSvc, devices, $mdSidenav, $mdToast, $mdMedia, titleSvc) {
             var ctrl = this;
 
             ctrl.devices = devices;
@@ -12,6 +12,8 @@ angular.module('HydroZone')
 
             ctrl.$mdSidenav = $mdSidenav;
             ctrl.$mdMedia = $mdMedia;
+
+            titleSvc.set('Dashboard');
 
             ctrl.startWatering = function() {
                 ctrl.disableAll = true;

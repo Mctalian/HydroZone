@@ -1,12 +1,13 @@
 describe('dashboardCtrl', function() {
-    var ctrl, rachioSvcMock, devicesMock, $rootScope, $q;
+    var ctrl, rachioSvcMock, devicesMock, $rootScope, $q, titleSvc;
 
     beforeEach(module('HydroZone'));
 
-    beforeEach(inject(function($controller, _rachioSvcMock_, _$rootScope_, _$q_) {
+    beforeEach(inject(function($controller, _rachioSvcMock_, _$rootScope_, _$q_, _titleSvc_) {
         rachioSvcMock = _rachioSvcMock_;
         $rootScope = _$rootScope_;
         $q = _$q_;
+        titleSvc = _titleSvc_;
 
         devicesMock = [{
             id: 0,
@@ -29,7 +30,8 @@ describe('dashboardCtrl', function() {
             rachioSvc: rachioSvcMock,
             devices: devicesMock,
             $mdSidenav: $mdSidenavMock,
-            $mdToast: $mdToast
+            $mdToast: $mdToast,
+            titleSvc: titleSvc
         });
     }));
 
