@@ -21,7 +21,7 @@
                         ng-disabled="vm.disableAll"
                         required>
                     <div ng-messages="apiTokenForm.token.$error" role="alert">
-                        <div ng-hide="apiTokenForm.token.$valid" ng-message="pattern">API Key is Invalid</div>
+                        <div id="invalidKey" ng-hide="apiTokenForm.token.$valid" ng-message="pattern">API Key is Invalid</div>
                     </div>
                 </md-input-container>
             </form>
