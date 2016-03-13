@@ -1,9 +1,14 @@
+var _ = require('lodash');
+var assert = require('assert');
+var By = require('selenium-webdriver').By;
+var until = require('selenium-webdriver').until;
 
 var sharedSteps = module.exports = function(){
     this.World = require('../support/world');
 
     this.Given(/^I am on the home page$/, function(next) {
-        this.visit('/', next);
+        this.get('/');
+        next();
     });
 
     this.Given(/^I navigate directly to the dashboard$/, function(next) {
@@ -11,7 +16,7 @@ var sharedSteps = module.exports = function(){
     });
 
     this.Given(/^I enter "([^"]*)" into the token field$/, function(text, next) {
-        this.browser.fill('#apiToken', text);
+        this.driver.findElement(By.id('apiToken')).sendKeys(text);
         next();
     });
 
@@ -31,9 +36,16 @@ var sharedSteps = module.exports = function(){
         });
     });
 
-    this.Then(/^I should see "([^"]*)"$/, function(text, next) {
-        this.browser.text('body').should.containEql(text);
-        next();
+    this.Then(/^I should see "([^"]*)"$/, {timeout: 10*1000}, function(text, next) {
+        this.driver.findElement(By.tagName('body')).getAttribute('innerHTML').then(function(html) {
+            assert(_.includes(html, text));
+            next();
+        });
+    });
+
+    this.Then(/^the element with id "([^"]*)" should be visible on the page$/, function(id, next) {
+        this.driver.wait(until.elementIsVisible(this.driver.findElement(By.id('id'))))
+            .then(next);
     });
 
     this.Then(/^the "([^"]*)" button should be "([^"]*)"$/, function(btn, state, next) {
@@ -46,9 +58,11 @@ var sharedSteps = module.exports = function(){
         next();
     });
 
-    this.Then(/^I am on the "([^"]*)" page$/, function(url, next) {
-        this.browser.location.href.should.containEql(url);
-        next();
+    this.Then(/^I am on the "([^"]*)" page$/, {timeout: 10*1000}, function(title, next) {
+        this.driver.wait(until.titleContains(title)).then(function(value) {
+            assert(value);
+            next();
+        });
     });
 
     this.Then(/^I return to the home page$/, function(next) {

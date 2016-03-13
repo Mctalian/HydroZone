@@ -5,7 +5,8 @@ Feature: Home page
 
     Scenario: Visiting the home page
         Given I am on the home page
-        Then I should see "HydroZone"
+        Then I am on the "Sign In" page
+        And I should see "HydroZone"
         And I should see "API Token"
 
     Scenario: Entering an invalid API Token
@@ -13,8 +14,7 @@ Feature: Home page
         And I enter "zqwplkmx-92a6-4913-b83c-64cc713cbc1e" into the token field
         Then I should see "API Key is Invalid"
 
-    # Scenario: Submitting a valid API Token
-    #     Given I am on the home page
-    #     And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
-    #     And I wait
-    #     Then I am on the "dashboard" page
+    Scenario: Submitting a valid API Token
+        Given I am on the home page
+        And I enter "c3667b81-92a6-4913-b83c-64cc713cbc1e" into the token field
+        Then I am on the "Dashboard" page
