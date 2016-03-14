@@ -6,7 +6,7 @@ var until = require('selenium-webdriver').until;
 var sharedSteps = module.exports = function(){
     this.World = require('../support/world');
 
-    this.Given(/^I am on the home page$/, function(next) {
+    this.Given(/^I am on the home page$/, {timeout: 10*1000}, function(next) {
         this.get('/');
         next();
     });
@@ -20,30 +20,33 @@ var sharedSteps = module.exports = function(){
         });
     });
 
-    this.Given(/^I navigate directly to the dashboard$/, function(next) {
+    this.Given(/^I navigate directly to the dashboard$/, {timeout: 10*1000}, function(next) {
         this.get('/dashboard');
         next();
     });
 
-    this.Given(/^I enter "([^"]*)" into the token field$/, function(text, next) {
-        this.driver.findElement(By.id('apiToken')).sendKeys(text);
-        next();
+    this.Given(/^I enter "([^"]*)" into the token field$/, {timeout: 10*1000}, function(text, next) {
+        this.driver.findElement(By.id('apiToken')).sendKeys(text).then(function() {
+            next();
+        });
     });
 
-    this.Given(/^I enter "([^"]*)" into the "([^"]*)" field$/, function(text, input, next) {
+    this.Given(/^I enter "([^"]*)" into the "([^"]*)" field$/, {timeout: 10*1000}, function(text, input, next) {
         this.driver.findElement(By.name(input)).sendKeys(text).then(function() {
             next();
         });
     });
 
-    this.Given(/^I click the "([^"]*)" button$/, function(btn, next) {
-        this.driver.findElement(By.id(`${btn}`)).click();
-        next();
+    this.Given(/^I click the "([^"]*)" button$/, {timeout: 10*1000}, function(btn, next) {
+        this.driver.findElement(By.id(`${btn}`)).click().then(function() {
+            next();
+        });
     });
 
     this.Given(/^I select "([^"]*)"/, {timeout: 10*1000}, function(btn, next) {
-        this.driver.findElement(By.id(`${btn}`)).click();
-        next();
+        this.driver.findElement(By.id(`${btn}`)).click().then(function() {
+            next();
+        });
     });
 
     this.Then(/^I should see "([^"]*)"$/, {timeout: 10*1000}, function(text, next) {
@@ -65,14 +68,14 @@ var sharedSteps = module.exports = function(){
         });
     });
 
-    this.Then(/^the "([^"]*)" button should be "([^"]*)"$/, function(btn, desired, next) {
+    this.Then(/^the "([^"]*)" button should be "([^"]*)"$/, {timeout: 10*1000}, function(btn, desired, next) {
         this.driver.findElement(By.id(`${btn}`)).getAttribute('disabled').then(function(state) {
             assert(desired === state);
             next();
         });
     });
 
-    this.Then(/^the "([^"]*)" field should be empty$/, function(input, next) {
+    this.Then(/^the "([^"]*)" field should be empty$/, {timeout: 10*1000}, function(input, next) {
         this.driver.findElement(By.name(input)).getAttribute('value').then(function(value) {
             assert(value === '');
             next();
@@ -93,11 +96,14 @@ var sharedSteps = module.exports = function(){
         });
     });
 
-    this.Then(/^"([^"]*)" should be deselected$/, function(btn, next) {
-        this.driver.findElement(By.id(`${btn}`)).getAttribute('class').then(function(classes) {
-            assert(!_.includes(classes, 'selected'));
-            next();
-        });
+    this.Then(/^"([^"]*)" should be deselected$/, {timeout: 10*1000}, function(btn, next) {
+        var outerThis = this;
+        setTimeout(function() {
+            outerThis.driver.findElement(By.id(`${btn}`)).getAttribute('class').then(function(classes) {
+                assert(!_.includes(classes, 'selected'));
+                next();
+            });
+        }, 1000);
     });
 
     this.Then(/^all zones should be selected$/, {timeout: 15*1000}, function(next) {
