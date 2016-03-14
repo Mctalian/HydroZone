@@ -38,7 +38,6 @@
         "grunt-contrib-jshint": "1.0.0",
         "grunt-cucumberjs": "0.8.8",
         "grunt-karma": "0.12.1",
-        "html5": "1.0.5",
         "jasmine": "2.4.1",
         "jshint-stylish": "2.1.0",
         "karma": "0.13.22",
@@ -47,9 +46,7 @@
         "karma-phantomjs-launcher": "1.0.0",
         "lodash": "4.6.1",
         "phantomjs-prebuilt": "2.1.5",
-        "selenium-webdriver": "2.52.0",
-        "should": "8.2.2",
-        "zombie": "4.2.1"
+        "selenium-webdriver": "2.52.0"
     },
     "preferGlobal": false,
     "private": true,
